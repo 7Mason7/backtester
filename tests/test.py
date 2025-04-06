@@ -1,5 +1,17 @@
-import pandas as pd
+from backtester.Account import Account
+from backtester.Order import Order
 
-def test()
+def test():
+    acct = Account()
     
-    return None
+    acct.order_create(Order(symbol="SPY", quantity=10, order_type = "Limit", price=11))
+
+    current_price = 10
+
+    acct.order_check(current_price)
+
+    print(acct.cash)
+    print(acct.activity)
+
+
+test()

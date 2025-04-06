@@ -1,7 +1,6 @@
 # class containing the blueprint for a fake brokerage account
 
 import numpy as np
-
 from .Order import Order
 
 class Account:
@@ -10,10 +9,31 @@ class Account:
     This includes the cash, holdings, open orders, and a log of activity.
     """
     def __init__(self, cash: float = 1000):
+        """
+        Initializes a new Account instance with starting cash and empty data structures.
+
+        Parameters
+        ----------
+        cash : float, optional
+            The initial cash balance for the account. Defaults to 1000.
+
+        Attributes
+        ----------
+        cash : float
+            The current cash balance in the account.
+        holdings : dict
+            A dictionary mapping security symbols to their quantities or values.
+        activity : list
+            A list recording account activities (e.g., trades, deposits).
+        open_orders : list[Order]
+            A list of pending Order objects associated with the account.
+        buying_power : float
+            The available funds for purchasing securities, initialized to the cash amount.
+        """
         self.cash: float = cash
-        self.holdings: dict
-        self.activity: list
-        self.open_orders: list
+        self.holdings: dict = {}
+        self.activity: list = []
+        self.open_orders: list[Order] = []
         self.buying_power: float = cash
 
 
@@ -29,12 +49,45 @@ class Account:
         return _total_position_value + self.cash
         
 
-    def order_create(self, symbol, quantity, order_type, time_in_force, price):
-        self.open_orders.append(Order(symbol, quantity, order_type, time_in_force, price))
+    def order_create(self, order: Order):
+        """
+        Adds an existing Order object to the Account's open_orders list.
 
-    def order_cancel(self, index):
-        del self.open_orders[index]
+        Parameters
+        ----------
+        order : Order, required
+            An instance of the Order class to be added to open_orders.
 
-    def order_execute(self, index):
-        del self.open_orders[index]
-    
+        Raises
+        ------
+        TypeError
+            If the provided order is not an instance of the Order class.
+        """
+        if not isinstance(order, Order):
+            raise TypeError("Parameter 'order' must be an instance of Order")
+        self.open_orders.append(order)
+
+
+    def order_cancel(self, order_index):
+        del self.open_orders[order_index]
+
+
+    def order_check(self, current_price):
+        i = 0
+        while i < len(self.open_orders):
+            order = self.open_orders[i]
+            order.check_fill(current_price)
+            if order.status == "Executed":
+                if order.buy_or_sell == "Buy":
+                    _total_cost = order.executed_price * order.quantity
+                    self.cash = self.cash - _total_cost
+                    self.activity.append(-_total_cost)
+                elif order.buy_or_sell == "Sell":
+                    _total_proceeds = (order.executed_price * order.quantity)
+                    self.cash = self.cash + _total_proceeds
+                    self.activity.append(_total_proceeds)
+                del self.open_orders[i]
+            else:
+                i += 1
+        else:
+            i += 1
