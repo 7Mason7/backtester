@@ -22,7 +22,7 @@ class Account:
         cash : float
             The current cash balance in the account.
         holdings : dict
-            A dictionary mapping security symbols to their quantities or values.
+            A dictionary mapping security symbols to their quantities.
         activity : list
             A list recording account activities (e.g., trades, deposits).
         open_orders : list[Order]
@@ -42,12 +42,10 @@ class Account:
         Fetches the current balance and positions value combined.
         """
         _total_position_value: float = 0
-
         for key in self.holdings:
-            _total_position_value = _total_position_value + self.holdings[key] # * fetch_price(key)
-                                                             
+            _total_position_value = _total_position_value + self.holdings[key] # * fetch_price(key)    
         return _total_position_value + self.cash
-        
+
 
     def order_create(self, order: Order):
         """
@@ -69,10 +67,16 @@ class Account:
 
 
     def order_cancel(self, order_index):
+        """
+        Cancels a given order at the selected index within the open_orders attribute.
+        """
         del self.open_orders[order_index]
 
 
     def order_check(self, current_price):
+        """
+        Pass a price to check all open_orders for execution. If the order is executed, the order is removed and added to activity.
+        """
         i = 0
         while i < len(self.open_orders):
             order = self.open_orders[i]
@@ -82,10 +86,12 @@ class Account:
                     _total_cost = order.executed_price * order.quantity
                     self.cash = self.cash - _total_cost
                     self.activity.append(-_total_cost)
+                    self.holdings[order.symbol] = order.quantity
                 elif order.buy_or_sell == "Sell":
                     _total_proceeds = (order.executed_price * order.quantity)
                     self.cash = self.cash + _total_proceeds
                     self.activity.append(_total_proceeds)
+                    self.holdings[order.symbol] = -order.quantity
                 del self.open_orders[i]
             else:
                 i += 1
