@@ -87,7 +87,6 @@ class Account:
         current_price : float, required
             The price you want to check the order against.
         """
-        i = 0
         executed_orders = []
         for order in self.open_orders:
             order.check_fill(current_price)
@@ -103,6 +102,5 @@ class Account:
                     self.cash += total_proceeds
                     self.activity.append(total_proceeds)
                     self.holdings[order.symbol] = self.holdings.get(order.symbol, 0) - order.quantity
-                del self.open_orders[i]
         for order in executed_orders:
             self.open_orders.remove(order)
