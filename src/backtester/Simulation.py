@@ -1,5 +1,5 @@
 
 class Simulation:
     def __init__(self):
-        # Test
-        #### 
+        self.candle_data
+        
