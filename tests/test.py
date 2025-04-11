@@ -1,5 +1,5 @@
-from backtester.Account import Account
-from backtester.Order import Order
+from backtester.Account.Account import Account
+from backtester.Orders.Order import Order
 
 def test():
     acct = Account()

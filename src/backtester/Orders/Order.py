@@ -14,6 +14,12 @@ class OrderType(Enum):
     BUY = "buy"
     SELL = "sell"
 
+class OrderType(Enum):
+    MARKET = "market"
+    LIMIT = "limit"
+    STOP = "stop"
+    STOP_LIMIT = "stop limit"
+
 @dataclass
 class Order:
     symbol: str

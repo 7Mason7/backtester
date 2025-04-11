@@ -1,7 +1,7 @@
 # class containing the blueprint for a fake brokerage account
 
 import numpy as np
-from .Order import Order
+from ..Orders.Order import Order
 
 class Account:
     """
@@ -77,30 +77,3 @@ class Account:
         """
         del self.open_orders[order_index]
 
-
-    def order_check(self, current_price: float):
-        """
-        Pass a price to check all open_orders for execution. If the order is executed, the order is removed and added to activity.
-
-        Parameters
-        ----------
-        current_price : float, required
-            The price you want to check the order against.
-        """
-        executed_orders = []
-        for order in self.open_orders:
-            order.check_fill(current_price)
-            if order.status == "Executed":
-                executed_orders.append(order)
-                if order.buy_or_sell == "Buy":
-                    total_cost = order.executed_price * order.quantity
-                    self.cash -= total_cost
-                    self.activity.append(-total_cost)
-                    self.holdings[order.symbol] = self.holdings.get(order.symbol, 0) + order.quantity
-                elif order.buy_or_sell == "Sell":
-                    total_proceeds = (order.executed_price * order.quantity)
-                    self.cash += total_proceeds
-                    self.activity.append(total_proceeds)
-                    self.holdings[order.symbol] = self.holdings.get(order.symbol, 0) - order.quantity
-        for order in executed_orders:
-            self.open_orders.remove(order)
