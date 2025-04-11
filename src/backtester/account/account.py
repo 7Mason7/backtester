@@ -1,7 +1,7 @@
 # class containing the blueprint for a fake brokerage account
 
 import numpy as np
-from ..Orders.Order import Order
+from ..orders.order import Order
 
 class Account:
     """
