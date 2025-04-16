@@ -1,9 +1,11 @@
 from .order import *
 
+
 class OMS:
     """
-    OMS (Order Management System) is used to simulate the logic for orders.
+    OMS (Order Management System) is used to handle the logic of the orders.
     """
+    def __init__(self):
 
     def check_fill(self, price: float, order: Order)-> bool:
         """
@@ -16,6 +18,4 @@ class OMS:
         order : Order, required
             The order you want to check.
         """
-        if order.status == "Open"
-
-    
+        if isinstance(MarketOrder):
