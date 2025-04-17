@@ -31,11 +31,6 @@ class OrderType(Enum):
 
 @dataclass
 class Order:
-"""
-A simple Order base class with standard attributes.
-
-Intended for data and does not handle order execution logic.
-"""
     symbol: str
     quantity: int
     direction: OrderDirection
@@ -59,8 +54,8 @@ class MarketOrder(Order):
 
 @dataclass
 class LimitOrder(Order):
-    limit_price: float
+    limit_price: float = None
 
 @dataclass
 class StopOrder(Order):
-    stop_price: float
+    stop_price: float = None

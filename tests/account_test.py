@@ -1,17 +1,33 @@
-from backtester.Account import Account
-from backtester.Order import Order
+from ..src.backtester.account.account import Account
 
-def test_create_order():
-    # Given
-    acct = Account(1000)
-    expected_cash = 890
-    expected_activity = [-110]
-    expected_holdings = {'SPY': 10}
-    # When
-    acct.order_create(Order(symbol="SPY", quantity=10, order_type="Limit", price=11))
-    current_price = 10
-    acct.order_check(current_price)
-    # Then
-    assert acct.cash == expected_cash
-    assert acct.activity == expected_activity
-    assert acct.holdings == expected_holdings
+def account_test_deposit_cash():
+    # Arrange:
+    acct = Account()
+
+    # Act:
+    acct.deposit_cash(100)
+
+    # Assert:
+    assert acct.cash == 100, "Deposit did not update balance correctly."
+
+def account_test_withdraw_cash():
+    # Arrange:
+    acct = Account()
+
+    # Act:
+    acct.withdraw_cash(100)
+
+    # Assert:
+    assert acct.cash == -100, "Withdraw did not update balance correctly."
+
+
+def account_test_get_portfolio_value():
+    # Arrange:
+    acct = Account()
+    acct.set_cash = 100
+
+    # Act:
+    portfolioVal = acct.get_portfolio_value
+
+    # Assert:
+    assert portfolioVal == 100, "get_portfolio_value did not return the correct value."
