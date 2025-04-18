@@ -17,7 +17,7 @@ def check_order_fill(self, price: float, order: Order) -> bool:
         elif order.direction == "sell":
             return order.limit_price <= price
         return False
-            
+        
     elif isinstance(order, StopOrder):
         if order.direction == "buy":
             return order.stop_price <= price
