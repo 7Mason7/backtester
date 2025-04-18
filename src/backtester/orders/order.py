@@ -9,6 +9,7 @@ __all__ = [
     "OrderStatus",
     "OrderDirection",
     "OrderType",
+    "TimeInForce",
     "Order",
     "MarketOrder",
     "LimitOrder",
@@ -29,33 +30,34 @@ class OrderType(Enum):
     LIMIT = "limit"
     STOP = "stop"
 
+class TimeInForce(Enum):
+    GTC = "gtc"
+    DAY = "day"
+
 @dataclass
 class Order:
+    order_id: str
     symbol: str
     quantity: int
     direction: OrderDirection
-    type: OrderType
-    price: Optional[float] = None
+    time_in_force: TimeInForce
     status: OrderStatus = OrderStatus.OPEN
     timestamp: datetime = datetime.now()
-    time_in_force: str = "GTC"
-
-    def __post_init__(self):
-        # LIMIT, STOP, and STOP_LIMIT order must have a price
-        if self.order_type in (OrderType.LIMIT, OrderType.STOP) and self.price is None:
-            raise ValueError(f"Order type {self.order_type.value} requires a price, but price is None")
-        # MARKET orders should not have a price
-        if self.order_type == OrderType.MARKET and self.price is not None:
-            raise ValueError("Market orders should not have a price set")
+    executed_price: float = None
     
 @dataclass
 class MarketOrder(Order):
-    pass
+    def __post_init__(self):
+        self.type = OrderType.MARKET
 
 @dataclass
 class LimitOrder(Order):
-    limit_price: float = None
+    limit_price: float
+    def __post_init__(self):
+        self.type = OrderType.LIMIT
 
 @dataclass
 class StopOrder(Order):
-    stop_price: float = None
+    stop_price: float
+    def __post_init__(self):
+        self.type = OrderType.STOP
