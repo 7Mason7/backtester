@@ -52,12 +52,12 @@ class MarketOrder(Order):
 
 @dataclass
 class LimitOrder(Order):
-    limit_price: float
+    limit_price: float= None
     def __post_init__(self):
         self.type = OrderType.LIMIT
 
 @dataclass
 class StopOrder(Order):
-    stop_price: float
+    stop_price: float = None
     def __post_init__(self):
         self.type = OrderType.STOP

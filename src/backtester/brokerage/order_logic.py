@@ -1,7 +1,7 @@
 from .order import *
 import numbers
 
-def check_order_fill(self, price: float, order: Order) -> bool:
+def check_order_fill(price: float, order: Order) -> bool:
     """
     Pass a price and order to check if it is due for a fill. Supports MarketOrder, LimitOrder, and StopOrder
     """
