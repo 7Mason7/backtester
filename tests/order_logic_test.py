@@ -1,4 +1,5 @@
-from ..src.backtester.orders import *
+from ..src.backtester.brokerage.order import *
+from ..src.backtester.brokerage.order_logic import check_order_fill
 
 def check_buy_marketorder_for_fill():
     # Arrange:
