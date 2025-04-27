@@ -6,58 +6,41 @@ from typing import Optional
 from datetime import datetime
 
 __all__ = [
-    "OrderStatus",
-    "OrderDirection",
-    "OrderType",
-    "TimeInForce",
     "Order",
     "MarketOrder",
     "LimitOrder",
     "StopOrder"
 ]
 
-class OrderStatus(Enum):
-    OPEN = "open"
-    EXECUTED = "executed"
-    CANCELLED = "canceled"
-
-class OrderDirection(Enum):
-    BUY = "buy"
-    SELL = "sell"
-
-class OrderType(Enum):
-    MARKET = "market"
-    LIMIT = "limit"
-    STOP = "stop"
-
-class TimeInForce(Enum):
-    GTC = "gtc"
-    DAY = "day"
-
 @dataclass
 class Order:
     order_id: str
     symbol: str
     quantity: int
-    direction: OrderDirection
-    time_in_force: TimeInForce
-    status: OrderStatus = OrderStatus.OPEN
+    direction: str
+    time_in_force: str
+    status: str = "open"
     timestamp: datetime = datetime.now()
     executed_price: float = None
+    def __post_init__(self):
+        if self.time_in_force not in ["day", "gtc"]:
+            raise ValueError("time_in_force must be 'day' or 'gtc'")
+        if self.status not in ["open", "executed", "cancelled"]:
+            raise ValueError("status must be either 'open', 'executed', or 'cancelled'")
     
 @dataclass
 class MarketOrder(Order):
     def __post_init__(self):
-        self.type = OrderType.MARKET
+        self.type = "market"
 
 @dataclass
 class LimitOrder(Order):
     limit_price: float= None
     def __post_init__(self):
-        self.type = OrderType.LIMIT
+        self.type = "limit"
 
 @dataclass
 class StopOrder(Order):
     stop_price: float = None
     def __post_init__(self):
-        self.type = OrderType.STOP
+        self.type = "stop"

@@ -20,7 +20,7 @@ class OMS:
             print(f"Unexpected error in get_open_orders_by_symbol: {e}")
             return []
     
-    def new_order(self, order: Order) -> None:
+    def new_open_order(self, order: Order) -> None:
         try:
             if order.order_id in self.open_orders:
                 print(f"Order ID {order.order_id} already exists in open orders")
@@ -36,6 +36,7 @@ class OMS:
             if order_id not in self.open_orders:
                 print(f"Order ID {order_id} does not exist in open_orders.")
             else:
+                self.open_orders[order_id].status = "cancelled"
                 self.cancelled_orders[order_id] = self.open_orders[order_id]
                 del self.open_orders[order_id]
         except KeyError as e:

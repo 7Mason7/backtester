@@ -37,6 +37,7 @@ class Account:
             if symbol not in priceDict:
                 raise KeyError(f"Missing price for symbol: {symbol}")
             portfolio_value += quantity * priceDict[symbol]
+        return portfolio_value
 
 
 
