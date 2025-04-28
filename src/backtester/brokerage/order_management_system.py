@@ -26,8 +26,6 @@ class OMS:
                 print(f"Order ID {order.order_id} already exists in open orders")
             else:
                 self.open_orders[order.order_id] = order
-        except ArithmeticError as e:
-            print(f"Invalid order object: {e}")
         except Exception as e:
             print(f"Unexpected error in new_order: {e}")
         
