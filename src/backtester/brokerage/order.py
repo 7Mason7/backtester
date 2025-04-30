@@ -17,6 +17,7 @@ class Order:
     quantity: int
     direction: str
     time_in_force: str
+    short: bool = False
     status: str = "open"
     timestamp: datetime = datetime.now()
     executed_price: float = None

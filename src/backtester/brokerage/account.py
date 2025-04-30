@@ -3,21 +3,19 @@
 class Account:
     """
     The Account class is the a representation of what a basic account would contain.
-    This includes the cash, holdings, and a log of activity.
+    This includes the cash, holdings, and a log of activity. 
+    Not intended for a backtest and should be used as a base class.
+
+    Attributes
+    ----------
+    cash : float
+        The current cash balance in the account.
+    holdings : dict
+        A dictionary mapping security symbols to their quantities.
+    activity : list
+        A list recording account activities (e.g., trades, deposits).
     """
     def __init__(self):
-        """
-        Initializes a new Account instance with starting cash and empty data structures.
-
-        Attributes
-        ----------
-        cash : float
-            The current cash balance in the account.
-        holdings : dict
-            A dictionary mapping security symbols to their quantities.
-        activity : list
-            A list recording account activities (e.g., trades, deposits).
-        """
         self.cash: float = 0
         self.holdings: dict = {}
         self.activity: list = []
