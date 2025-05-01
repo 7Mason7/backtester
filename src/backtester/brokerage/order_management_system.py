@@ -1,14 +1,13 @@
 from .order import *
-from typing import Dict
 
 class OMS:
     """
     OMS (Order Management System) is used to track and manage orders.
     """
     def __init__(self):
-        self.open_orders: Dict[str, Order] = {}
-        self.cancelled_orders: Dict[str, Order] = {}
-        self.executed_orders: Dict[str, Order] = {}
+        self.open_orders: dict[str, Order] = {}
+        self.cancelled_orders: dict[str, Order] = {}
+        self.executed_orders: dict[str, Order] = {}
 
     def get_open_orders_by_symbol(self, symbol: str) -> list[Order]:
         try:

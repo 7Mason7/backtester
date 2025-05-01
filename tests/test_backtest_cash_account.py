@@ -2,7 +2,7 @@ from ..src.backtester.brokerage.order import *
 from ..src.backtester.brokerage.backtest_account import BacktestCashAccount
 from ..src.backtester.brokerage.order_management_system import OMS
 
-def test_get_buying_power():
+def test_get_cash_available_to_invest():
     # Arrange:
     price_dict = {"SPY":100, "AAPL":90, "XYZ":9}
     acct = BacktestCashAccount()
@@ -12,7 +12,7 @@ def test_get_buying_power():
     acct.oms.new_open_order(LimitOrder("5215", "QQQ", 1, "sell", "day", limit_price=100)) # no effect
     acct.oms.new_open_order(StopOrder("1252", "XYZ", 5, "buy", "day", stop_price=10))
     # Attempt:
-    buyingpower = acct.get_buying_power(price_dict)
+    buyingpower = acct.get_cash_available_to_invest(price_dict)
     # Assert:
     print(f"cash is {acct.cash}")
     assert buyingpower == -250
