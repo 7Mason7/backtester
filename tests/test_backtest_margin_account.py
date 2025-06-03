@@ -1,5 +1,5 @@
-from ..src.backtester.brokerage.order import *
-from ..src.backtester.brokerage.backtest_account import BacktestMarginAccount
+from backtester.brokerage.order import *
+from backtester.brokerage.backtest_account import BacktestMarginAccount
 
 def test_get_cash_available_to_invest():
     # Arrange:
