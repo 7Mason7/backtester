@@ -6,6 +6,7 @@ class BacktestCashAccount(Account):
     """
     A basic cash account for backtesting. Supported order types are Market, Limit, and Stop.
     """
+
     def __init__(self):
         super().__init__()
         self.oms = OMS()
@@ -33,7 +34,6 @@ class BacktestCashAccount(Account):
                     order_cost += order.quantity * price_dict[order.symbol]
         return order_cost
 
-
 class BacktestMarginAccount(Account):
     """
     Work in progress
@@ -44,6 +44,12 @@ class BacktestMarginAccount(Account):
         super().__init__()
         self.oms = OMS()
         self.margin_balance: float = 0
+        self.margin_requirements = {
+            'initial_long' : 0.5,
+            'initial_short' : 0.5,
+            'maint_long' : 0.25,
+            'maint_short' : 0.30,
+        }
     
     def get_cash_available_to_invest(self, price_dict: dict[str, float]) -> float:
         """
@@ -69,6 +75,9 @@ class BacktestMarginAccount(Account):
         return order_cost
 
     def get_open_order_req(self, price_dict: dict[str : float]) -> float:
+        """
+        Gets the total open order marign requirements within the OMS.
+        """
         order_req = 0
         for order in self.oms.open_orders.values():
             if order.direction == "buy":

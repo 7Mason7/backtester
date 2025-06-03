@@ -1,6 +1,6 @@
-from ..src.backtester.brokerage.order import *
-from ..src.backtester.brokerage.backtest_account import BacktestCashAccount
-from ..src.backtester.brokerage.order_management_system import OMS
+from backtester.brokerage.order import *
+from backtester.brokerage.backtest_account import BacktestCashAccount
+from backtester.brokerage.order_management_system import OMS
 
 def test_get_cash_available_to_invest():
     # Arrange:

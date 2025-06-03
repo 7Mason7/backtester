@@ -1,5 +1,5 @@
-from ..src.backtester.brokerage.order_management_system import OMS
-from ..src.backtester.brokerage.order import *
+from backtester.brokerage.order_management_system import OMS
+from backtester.brokerage.order import *
 
 def test_order_management_system_new_open_order():
     # Arrange:

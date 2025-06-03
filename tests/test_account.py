@@ -1,4 +1,4 @@
-from ..src.backtester.brokerage.account import Account
+from src.backtester.brokerage.account import Account
 
 def test_account_deposit_cash():
     # Arrange:
