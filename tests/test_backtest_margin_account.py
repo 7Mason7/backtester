@@ -56,6 +56,3 @@ def test_get_maintenance_requirement():
 
 def test_get_maintenance_excess():
     price_dict = {"SPY":100, "AAPL":90, "XYZ":9}
-
-def test_get_buying_power(): 
-    price_dict = {"SPY":100, "AAPL":90, "XYZ":9}
