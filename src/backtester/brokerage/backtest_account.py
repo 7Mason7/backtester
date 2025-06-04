@@ -159,5 +159,8 @@ class BacktestMarginAccount(Account):
         return req
 
     def get_maintenance_excess(self, price_dict: dict[str : float]) -> float:
+        """
+        Returns the amount of equity above the maintenance requirement. Negative maintenance excess indicates a maintenance call.
+        """
         return self.get_equity(price_dict) - self.get_maintenance_requirement(price_dict)
     
