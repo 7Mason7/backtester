@@ -3,7 +3,17 @@ import numbers
 
 def check_order_fill(price: float, order: Order) -> bool:
     """
-    Pass a price and order to check if it is due for a fill. Supports MarketOrder, LimitOrder, and StopOrder
+    Check if an order should be filled at the given price.
+    
+    Args:
+        price: Current market price
+        order: Order to check for fill
+        
+    Returns:
+        bool: True if order should be filled, False otherwise
+        
+    Raises:
+        TypeError: If order is not a supported order type
     """
     if not isinstance(price, numbers.Number): 
         return False
