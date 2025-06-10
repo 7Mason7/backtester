@@ -73,8 +73,24 @@ backtester/
 ├── src/
 │   └── backtester/
 │       ├── brokerage/     # Account and order management
-│       └── simulation/    # Historical data and simulation
-└── tests/                 # Test suite
+│       │   ├── account.py
+│       │   ├── backtest_account.py
+│       │   ├── order.py
+│       │   ├── order_logic.py
+│       │   └── order_management_system.py
+│       ├── simulation/    # Historical data and simulation
+│       │   ├── historical_data.py
+│       │   └── simulation.py
+│       └── analysis/      # Analysis tools and utilities
+├── tests/                 # Test suite
+│   ├── test_account.py
+│   ├── test_backtest_cash_account.py
+│   ├── test_backtest_margin_account.py
+│   ├── test_order_logic.py
+│   ├── test_order_management_system.py
+│   └── test_simulation.py
+├── pyproject.toml        # Project configuration and dependencies
+└── README.md            # This file
 ```
 
 ## Contributing
