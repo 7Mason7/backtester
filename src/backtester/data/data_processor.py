@@ -38,10 +38,30 @@ class CandlestickProcessor:
         file_path = Path(file_path)
         if not file_path.exists():
             raise FileNotFoundError(f"CSV file not found: {file_path}")
-        self.data_sources[source_name] = pd.read_csv(file_path)
+        df = pd.read_csv(file_path)
+        self.add_data_frame(source_name, df, timestamp_column, open_column, high_column, low_column, close_column)
 
-    def add_data_frame(self, source_name: str, df: pd.DataFrame) -> None:
-        self.data_sources[source_name] = df
+    def add_data_frame(self,
+                       source_name: str,
+                       df: pd.DataFrame,
+                       timestamp_column: str,
+                       open_column: str,
+                       high_column: str,
+                       low_column: str,
+                       close_column: str,
+                       ) -> None:
+        """
+        Add data from a Pandas DataFrame.
+        Args:
+            source_name: Name of the data source.
+            df: Pandas DataFrame.
+            timestamp_column: Name of the timestamp column.
+            open_column: Name of the open column.
+            high_column: Name of the high column.
+            low_column: Name of the low column.
+            close_column: Name of the close column.
+        """
+        
         
     def _merge_by_timestamp(self) -> pd.DataFrame:
         for data_source in self.data_sources:
