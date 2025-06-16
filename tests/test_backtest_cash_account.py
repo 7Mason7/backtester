@@ -16,3 +16,6 @@ def test_get_cash_available_to_invest():
     # Assert:
     print(f"cash is {acct.cash}")
     assert buyingpower == -250
+
+if __name__ == "__main__":
+    test_get_cash_available_to_invest()

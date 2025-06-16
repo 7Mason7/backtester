@@ -16,7 +16,6 @@ def test_account_withdraw_cash():
     # Assert:
     assert acct.cash == -100
 
-
 def test_account_get_portfolio_value():
     # Arrange:
     acct = Account()
@@ -26,3 +25,9 @@ def test_account_get_portfolio_value():
     portfolioVal = acct.get_portfolio_value(price_dict)
     # Assert:
     assert portfolioVal == 100
+
+if __name__ == "__main__":
+    test_account_get_portfolio_value()
+    test_account_deposit_cash()
+    test_account_withdraw_cash()
+    test_account_get_portfolio_value()

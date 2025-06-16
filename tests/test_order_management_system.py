@@ -22,3 +22,7 @@ def test_order_management_system_cancel_order():
     assert oms.cancelled_orders[orderID] is order
     assert len(oms.open_orders) == 0
 
+if __name__ == "__main__":
+    test_order_management_system_new_open_order()
+    test_order_management_system_cancel_order()
+    

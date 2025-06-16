@@ -56,3 +56,11 @@ def test_get_maintenance_requirement():
 
 def test_get_maintenance_excess():
     price_dict = {"SPY":100, "AAPL":90, "XYZ":9}
+
+if __name__ == "__main__":
+    test_get_cash_available_to_invest()
+    test_get_open_order_cost()
+    test_get_equity()
+    test_get_maintenance_requirement()
+    test_get_maintenance_excess()
+

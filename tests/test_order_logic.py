@@ -19,3 +19,8 @@ def test_check_buy_limitorder_for_fill():
     # Assert
     assert outcome1 == True, "Buy limit order did not return a fill correctly"
     assert outcome2 == False, "Sell limit order did not return a fill correctly"
+
+if __name__ == "__main__":
+    test_check_buy_marketorder_for_fill()
+    test_check_buy_limitorder_for_fill()
+

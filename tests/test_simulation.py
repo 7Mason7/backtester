@@ -13,4 +13,5 @@ def test_simulation():
 
 
 
-test_simulation()
+if __name__ == "__main__":
+    test_simulation()
