@@ -79,4 +79,4 @@ class CandlestickProcessor:
         self.data_sources[source_name] = new_df
         
     def _merge_by_timestamp(self) -> pd.DataFrame:
-        pass
+        
