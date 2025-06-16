@@ -10,7 +10,6 @@ from src.backtester.brokerage.account import Account
 from src.backtester.brokerage.backtest_account import BacktestCashAccount, BacktestMarginAccount
 from src.backtester.brokerage.order import Order, MarketOrder, LimitOrder, StopOrder
 from src.backtester.brokerage.order_management_system import OMS
-from src.backtester.simulation.historical_data import HistoricalData
 
 class Simulation:
     def __init__(
