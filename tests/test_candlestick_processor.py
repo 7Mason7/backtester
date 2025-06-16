@@ -13,15 +13,28 @@ def test_add_data_frame():
         }
     )
     processor = CandlestickProcessor()
-    correct_columns = pd.Index([
-        'timestamp',
-        'open',
-        'high',
-        'low',
-        'close'
-        ])
+    correct_columns = pd.Index(['open', 'high', 'low', 'close'])
+    
     # Attempt
     processor.add_data_frame('XYZ', df, 'date', 'opening_price', 'highest', 'lowest', 'closing_price')
+    
     # Assert
-    print(processor.data_sources['XYZ'].columns)
+    result_df = processor.data_sources['XYZ']
+    assert result_df.columns.equals(correct_columns), \
+        f"Expected columns {correct_columns}, but got {result_df.columns}"
+    assert result_df.shape == (2, 4), \
+        f"Expected shape (2, 4), but got {result_df.shape}"
+    assert result_df.index.equals(pd.DatetimeIndex(['2023-01-01', '2023-01-02'])), \
+        f"Expected index {pd.DatetimeIndex(['2023-01-01', '2023-01-02'])}, but got {result_df.index}"
+    assert result_df.iloc[0]['open'] == 100, \
+        f"Expected open value 100, but got {result_df.iloc[0]['open']}"
+    assert result_df.iloc[0]['high'] == 102, \
+        f"Expected high value 102, but got {result_df.iloc[0]['high']}"
+    assert result_df.iloc[0]['low'] == 99, \
+        f"Expected low value 99, but got {result_df.iloc[0]['low']}"
+    assert result_df.iloc[0]['close'] == 101, \
+        f"Expected close value 101, but got {result_df.iloc[0]['close']}"
+
+if __name__ == "__main__":
+    test_add_data_frame()
 

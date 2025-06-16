@@ -73,8 +73,10 @@ class CandlestickProcessor:
             required_columns[3]: 'low',
             required_columns[4]: 'close'
         }
-
-        self.data_sources[source_name] = df[required_columns].rename(columns=col_mapper)
+        new_df = df[required_columns].rename(columns=col_mapper)
+        new_df['timestamp'] = pd.to_datetime(new_df['timestamp'])
+        new_df.set_index('timestamp', inplace=True)
+        self.data_sources[source_name] = new_df
         
     def _merge_by_timestamp(self) -> pd.DataFrame:
         pass
