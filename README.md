@@ -4,11 +4,9 @@ A Python-based backtesting framework for trading strategies.
 
 ## Features
 
+- Iterative backtesting with candlestick data
 - Support for both cash and margin accounts
-- Multiple order types (Market, Limit, Stop)
-- Realistic order management system
-- Historical data simulation capabilities
-- Comprehensive test coverage
+- Realistic order management with multiple order types (Market, Limit, Stop)
 
 ## Installation
 
