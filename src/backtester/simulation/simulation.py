@@ -14,15 +14,13 @@ from src.backtester.brokerage.order_management_system import OMS
 class Simulation:
     def __init__(
         self,
-        historical_data: HistoricalData,
         account: Account,  # Can be either BacktestCashAccount or BacktestMarginAccount
         start_date: pd.Timestamp = None,
         end_date: pd.Timestamp = None
     ):
-        self.historical_data = historical_data
         self.account = account
-        self.start_date = start_date or historical_data.time_index[0]
-        self.end_date = end_date or historical_data.time_index[-1]
+        self.start_date = start_date
+        self.end_date = end_date
         self.current_time_index = 0
         self.price_dict = {}
         self.performance_history = []
