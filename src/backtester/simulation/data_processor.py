@@ -61,10 +61,20 @@ class CandlestickProcessor:
             low_column: Name of the low column.
             close_column: Name of the close column.
         """
+        required_columns = [timestamp_column, open_column, high_column, low_column, close_column]
+        missing_columns = [col for col in required_columns if col not in df.columns]
+        if missing_columns:
+            raise ValueError(f"df is missing {missing_columns}")
         
+        col_mapper = {
+            required_columns[0]: 'timestamp',
+            required_columns[1]: 'open',
+            required_columns[2]: 'high',
+            required_columns[3]: 'low',
+            required_columns[4]: 'close'
+        }
+
+        self.data_sources[source_name] = df[required_columns].rename(columns=col_mapper)
         
     def _merge_by_timestamp(self) -> pd.DataFrame:
-        for data_source in self.data_sources:
-
-
-        
+        pass
