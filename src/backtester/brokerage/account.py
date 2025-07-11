@@ -1,6 +1,6 @@
 # class containing the blueprint for a fake brokerage account
-from src.backtester.brokerage.order_management_system import OMS
-from src.backtester.brokerage.order import *
+from backtester.brokerage.order_management_system import OMS
+from backtester.brokerage.order import *
 
 class Account:
     """
