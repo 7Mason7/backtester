@@ -34,7 +34,7 @@ def test_add_data_frame():
         f"Expected low value 99, but got {result_df.iloc[0]['low']}"
     assert result_df.iloc[0]['close'] == 101, \
         f"Expected close value 101, but got {result_df.iloc[0]['close']}"
-
+    
 if __name__ == "__main__":
     test_add_data_frame()
 
