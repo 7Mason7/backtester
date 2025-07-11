@@ -77,6 +77,10 @@ class CandlestickProcessor:
         new_df['timestamp'] = pd.to_datetime(new_df['timestamp'])
         new_df.set_index('timestamp', inplace=True)
         self.data_sources[source_name] = new_df
+
+    def _detect_timeframe(self, df: pd.DataFrame) -> str:
+        pass
+
         
     def _merge_by_timestamp(self) -> pd.DataFrame:
         pass

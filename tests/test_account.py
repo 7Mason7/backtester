@@ -1,5 +1,5 @@
-from src.backtester.brokerage.account import Account, CashAccount, MarginAccount
-from src.backtester.brokerage.order import MarketOrder, LimitOrder, StopOrder
+from backtester.brokerage.account import Account, CashAccount, MarginAccount
+from backtester.brokerage.order import MarketOrder, LimitOrder, StopOrder
 
 # Base Account Tests
 def test_account_deposit_cash():

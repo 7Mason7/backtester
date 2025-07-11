@@ -6,10 +6,10 @@ from typing import Dict, Optional
 import pandas as pd
 
 # Local imports
-from src.backtester.brokerage.account import Account
-from src.backtester.brokerage.backtest_account import BacktestCashAccount, BacktestMarginAccount
-from src.backtester.brokerage.order import Order, MarketOrder, LimitOrder, StopOrder
-from src.backtester.brokerage.order_management_system import OMS
+from backtester.brokerage.account import Account
+from backtester.brokerage.account import MarginAccount, CashAccount
+from backtester.brokerage.order import Order, MarketOrder, LimitOrder, StopOrder
+from backtester.brokerage.order_management_system import OMS
 
 class Simulation:
     def __init__(
