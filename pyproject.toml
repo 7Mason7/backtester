@@ -11,6 +11,7 @@ authors = [
 dependencies = [
     "pandas>=2.2.3",
     "numpy>=1.26.0",
+    "pytest>=8.4.0",
     "pytest-cov>=6.1.1",
 ]
 
