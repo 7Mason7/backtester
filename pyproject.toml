@@ -25,4 +25,6 @@ packages = ["src/backtester"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+pythonpath = ["src"]
 addopts = "-v --cov=src/backtester --cov-report=term-missing"
+
