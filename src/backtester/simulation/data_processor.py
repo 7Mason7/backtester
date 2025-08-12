@@ -73,16 +73,47 @@ class CandlestickProcessor:
             required_columns[3]: 'low',
             required_columns[4]: 'close'
         }
-        new_df = df[required_columns].rename(columns=col_mapper)
+
+        new_df = df[required_columns].rename(columns=col_mapper)B
         new_df['timestamp'] = pd.to_datetime(new_df['timestamp'])
         new_df.set_index('timestamp', inplace=True)
         self.data_sources[source_name] = new_df
 
-    def _detect_timeframe(self, df: pd.DataFrame) -> str:
-        pass
+    def merge_data(self) -> None:
+        # merge the datasources into a singular df
+        # loop through each df in data sources
+        # find the beginning and end timestamp
+        # if the next df has a beginning > the previous, set the beggining var = that beginning
+        # if the next df has an end < the previous, set the end var = that end
+        all_begin = None
+        all_end = None
 
+        for df in self.data_sources.values():
+            this_begin = df.index.min()
+            this_end = df.index.max()
+
+            if all_begin is None:
+                all_begin = this_begin
+                all_end = this_end
+            else:
+                if this_begin > all_begin:
+                    all_begin = this_begin
+                if this_end < all_end:
+                    all_end = this_end
+
+        if all_begin >= all_end:
+            self.processed_data = None
+            return
         
-    def _merge_by_timestamp(self) -> pd.DataFrame:
-        pass
+        merged = None
+        for df in self.data_sources.values():
+            sliced_df = df.loc[all_begin:all_end]
+            if merged is None:
+                merged = sliced_df
+            else:
+                # functionality to merge
+                pass
+            
 
-    
+    """ def _resample_by_timestamp(self) -> pd.DataFrame:
+        pass """ # will add functionality to resample to the highest timeframe
